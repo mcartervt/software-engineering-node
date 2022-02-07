@@ -15,7 +15,7 @@ export default class UserDao implements UserDaoI { // I notice the interface has
     async findAllUsers(): Promise<User[]> {
         return await UserModel.find();
     }
-    async findUserById(uid: string): Promise<User> {
+    async findUserById(uid: string): Promise<any> {//Changing to any from user
         return await UserModel.findById(uid);      // Changed userId to uid to match parameter
     }
     async createUser(user: User): Promise<User> { // Switched void to User to match Interface
