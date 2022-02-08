@@ -9,7 +9,8 @@
  import mongoose from "mongoose";
  
  // connect to the database
- mongoose.connect("mongodb://localhost:27017/tuiter");
+ mongoose.connect('mongodb+srv://carterm:admin@cluster0.16p9j.mongodb.net/tuiter?retryWrites=true&w=majority');
+ //mongoose.connect("mongodb://localhost:27017/tuiter");
  
  // create RESTful Web service API
  const app = express();

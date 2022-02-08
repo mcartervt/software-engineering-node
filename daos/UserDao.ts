@@ -18,8 +18,8 @@ export default class UserDao implements UserDaoI { // I notice the interface has
     async findUserById(uid: string): Promise<any> {//Changing to any from user
         return await UserModel.findById(uid);      // Changed userId to uid to match parameter
     }
-    async createUser(user: User): Promise<User> { // Switched void to User to match Interface
-        return await UserModel.create(user);
+    async createUser(user: User): Promise<any> { // Switched void to User to match Interface
+        return await UserModel.create(user);     // Changed User to any
     }
     async deleteUser(uid: string): Promise<any> {
         return await UserModel.deleteOne({_id: uid}); // Changed userId to uid to match parameter
