@@ -1,6 +1,6 @@
 import Tuit from "../models/Tuit";
 
-export default interface TuitDao {
+export default interface TuitDaoI {
     findAllTuits(): Promise<Tuit[]>;
     findAllTuitsByUser(uid: string): Promise<Tuit[]>;
     findTuitById(tid: string): Promise<Tuit>;
