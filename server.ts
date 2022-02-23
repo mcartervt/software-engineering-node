@@ -15,8 +15,9 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 const HOST = "cluster0.16p9j.mongodb.net";
 const DB_NAME = "tuiter";
 const DB_QUERY = "retryWrites=true&w=majority";
-const connectionString = '${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}';
-
+const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
+console.log(DB_USERNAME)
+console.log(DB_PASSWORD)
  // connect to the database
  mongoose.connect(connectionString);
  //mongoose.connect('mongodb+srv://carterm:admin@cluster0.16p9j.mongodb.net/tuiter?retryWrites=true&w=majority');
