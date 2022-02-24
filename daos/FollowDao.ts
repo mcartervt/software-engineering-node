@@ -1,3 +1,7 @@
+/**
+ * @file Implements DAO managing data storage of follows.  Uses mongoose FollowModel
+ * to integrate with MongoDB
+ */
 import FollowDaoI from "../interfaces/FollowDaoI";
 import FollowModel from "../mongoose/follows/FollowModel";
 import Follow from "../models/follows/Follow";

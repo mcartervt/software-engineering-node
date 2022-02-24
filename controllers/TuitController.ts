@@ -97,7 +97,7 @@ import TuitControllerI from "../interfaces/TuitController";
      * on whether updating a tuit was successful or not
      */
     updateTuit = (req: Request, res: Response) =>
-        TuitController.tuitDao.updateTuit(req.params.uid, req.body)
+        TuitController.tuitDao.updateTuit(req.params.tid, req.body)
             .then((status) => res.send(status));
 
     /**

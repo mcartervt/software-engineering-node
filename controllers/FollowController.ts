@@ -99,8 +99,10 @@ export default class FollowController implements FollowControllerI {
     /**
      * Retrieves a user being followed by a particular user from the database
      * @param {Request} req Represents request from client, including the path
-     * parameter userFollowingId and userFollowedId representing the user doing
+     * parameters userFollowingId and userFollowedId representing the user doing
      * the following and the user being followed
+     * @param {Response} res Represents response to client, including the 
+     * body formatted as JSON containing the user object being followed
      */
      userfindFollowById = (req: Request, res: Response) =>
         FollowController.followDao.userfindFollowById(req.params.userFollowingId, req.params.userFollowedId)
