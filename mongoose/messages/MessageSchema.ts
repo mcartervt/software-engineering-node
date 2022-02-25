@@ -1,3 +1,8 @@
+/**
+ * @file Implements a mongoose schema, based 
+ * on Message.ts, for the messages collection to 
+ * later be used in the mongoose model
+ */
 import mongoose, {Schema} from "mongoose";
 import Message from "../../models/messages";
 

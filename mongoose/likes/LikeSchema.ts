@@ -1,3 +1,8 @@
+/**
+ * @file Implements a mongoose schema, based 
+ * on Like.ts, for the likes collection to 
+ * later be used in the mongoose model
+ */
 import mongoose, {Schema} from "mongoose";
 import Like from "../../models/likes/Like";
 

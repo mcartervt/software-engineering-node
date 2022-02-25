@@ -1,3 +1,8 @@
+/**
+ * @file Implements a mongoose schema, based 
+ * on Bookmark.ts, for the bookmarks collection to 
+ * later be used in the mongoose model
+ */
 import mongoose, {Schema} from "mongoose";
 import Bookmark from "../../models/bookmarks/Bookmark";
 

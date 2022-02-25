@@ -1,3 +1,8 @@
+/**
+ * @file Implements a mongoose schema, based 
+ * on Follow.ts, for the follows collection to 
+ * later be used in the mongoose model
+ */
 import mongoose, {Schema} from "mongoose";
 import Follow from "../../models/follows/Follow";
 

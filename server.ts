@@ -1,5 +1,17 @@
 /**
- * @file Server file
+ * @file Implements an Express Node HTTP server. Declares RESTful Web services
+ * enabling CRUD operations on the following resources:
+ * <ul>
+ *     <li>users</li>
+ *     <li>tuits</li>
+ *     <li>likes</li>
+ *     <li>follows</li>
+ *     <li>bookmarks</li>
+ *     <li>messages</li>
+ * </ul>
+ * 
+ * Connects to a remote MongoDB instance hosted on the Atlas cloud database
+ * service
  */
  import express, {Request, Response} from 'express';
  //import CourseController from "./controllers/CourseController";
@@ -19,11 +31,9 @@ const HOST = "cluster0.16p9j.mongodb.net";
 const DB_NAME = "tuiter";
 const DB_QUERY = "retryWrites=true&w=majority";
 const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
-
+// connect to the database
  mongoose.connect(connectionString);
- //mongoose.connect("mongodb://localhost:27017/tuiter");
  
- // create RESTful Web service API
  const app = express();
  app.use(express.json());
  
@@ -33,7 +43,7 @@ const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${
  app.get('/add/:a/:b', (req: Request, res: Response) =>
      res.send(req.params.a + req.params.b));
  
- //const courseController = new CourseController(app);
+ // create RESTful Web service API
  const userController = UserController.getInstance(app);
  const tuitController = TuitController.getInstance(app);
  const likesController = LikeController.getInstance(app);
@@ -41,6 +51,9 @@ const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${
  const bookmarksController = BookmarkController.getInstance(app);
  const messagesController = MessageController.getInstance(app);
  
-
+/**
+ * Start a server listening at port 4000 locally
+ * but use environment variable PORT on Heroku if available.
+ */
 const PORT = 4000; 
 app.listen(process.env.PORT || PORT);

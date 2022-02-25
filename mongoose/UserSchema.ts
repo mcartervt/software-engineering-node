@@ -1,3 +1,8 @@
+/**
+ * @file Implements a mongoose schema, based 
+ * on User.ts, for the users collection to 
+ * later be used in the mongoose model
+ */
 import mongoose from "mongoose";
 import User from "../models/User";
 
