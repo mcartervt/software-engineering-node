@@ -15,12 +15,12 @@ export default class MessageDao implements MessageDaoI {
     userViewsAllMessagesSent = async (uid: string): Promise<Message[]> =>
         MessageModel
             .find({from: uid})
-            .populate("message", "to", "sentOn")
+            .populate("message", "to")
             .exec();
     userViewsAllMessagesReceived = async (uid: string): Promise<Message[]> =>
         MessageModel
             .find({to: uid})
-            .populate("message", "from", "sentOn")
+            .populate("message", "from")
             .exec();
     userDeletesMessage = async (uid: string, mid: string): Promise<any> =>
         MessageModel.deleteOne({from: uid, _id: mid});
@@ -29,6 +29,6 @@ export default class MessageDao implements MessageDaoI {
     userViewsMessageById = async (uid: string, mid: string): Promise<any> =>
         MessageModel
             .find({from: uid, _id: mid})
-            .populate("message", "to", "sentOn")
+            .populate("message", "to")
             .exec();
 }
