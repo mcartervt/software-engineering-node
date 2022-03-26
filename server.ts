@@ -34,7 +34,6 @@ const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${
 mongoose.connect(connectionString);
 
 const app = express();
-app.use(express.json());
 app.use(cors({
     credentials: true,
     origin: 'https://623f8c2990a68f289284b581--reverent-darwin-aeefbe.netlify.app'
@@ -58,6 +57,7 @@ if (process.env.ENVIRONMENT === 'PRODUCTION') {
 }
 
 app.use(session(sess))
+app.use(express.json());
 
 app.get('/', (req: Request, res: Response) =>
     res.send('Welcome!'));
