@@ -36,22 +36,21 @@ mongoose.connect(connectionString);
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: ['http://localhost:3000', 'https://623f8c2990a68f289284b581--reverent-darwin-aeefbe.netlify.app']
+    origin: 'https://623f8c2990a68f289284b581--reverent-darwin-aeefbe.netlify.app'
 }));
 
 const SECRET = 'process.env.SECRET';
 let sess = {
     secret: SECRET,
     proxy: true,
-    saveUninitialized: true,
-    resave: true,
     cookie: {
         secure: true,
         sameSite: "none"
     }
 }
 
-if (process.env.ENVIRONMENT === 'PRODUCTION') {
+const ENVIRONTMENT = process.env.environment;
+if (ENVIRONTMENT === 'PRODUCTION') {
     app.set('trust proxy', 1) // trust first proxy
     sess.cookie.secure = true // serve secure cookies
 }
