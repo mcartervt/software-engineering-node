@@ -49,8 +49,8 @@ let sess = {
     }
 }
 
-const ENVIRONMENT = process.env.environment; //Add to .env file 'ENVIRONMENT === DEVELOPMENT'
-if (ENVIRONMENT === 'PRODUCTION') {
+//const ENVIRONMENT = 'process.env.environment'; //Add to .env file 'ENVIRONMENT === DEVELOPMENT'
+if (process.env.ENVIRONMENT === 'PRODUCTION') {
     app.set('trust proxy', 1) // trust first proxy
     sess.cookie.secure = true // serve secure cookies
 }
