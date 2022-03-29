@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 
 const userDao: UserDao = UserDao.getInstance();
 
-
 // build the connection string
 const PROTOCOL = "mongodb+srv";
 const DB_USERNAME = process.env.DB_USERNAME;
@@ -81,8 +80,8 @@ export const giveRaise = (raise: number) => {
 // register('alice008', 'alice234', 'alice234@gmail.com')
 //   .then(user => console.log(user))
 //
-login('alice008', 'alice234')
-  .then(user => console.log(user))
+//login('alice008', 'alice234')
+//  .then(user => console.log(user))
 
 // userDao.findAllUsers()
 //   .then(users => console.log(users));
