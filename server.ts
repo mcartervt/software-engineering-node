@@ -37,25 +37,24 @@ mongoose.connect(connectionString);
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: 'https://623f8c2990a68f289284b581--reverent-darwin-aeefbe.netlify.app'
+    origin: 'https://reverent-darwin-aeefbe.netlify.app'
 }));
 
-const SECRET = process.env.SECRET; // Secret password for the session
 let sess = {
-    secret: SECRET,
+    secret: process.env.SECRET,
     saveUninitialized: true,
     resave: true,
-    proxy: true,
+    //proxy: true,
     cookie: {
-        secure: process.env.ENVIRONMENT === "PRODUCTION",
         sameSite: process.env.ENVIRONMENT === "PRODUCTION" ? "none" : "lax",
+        secure: process.env.ENVIRONMENT === "PRODUCTION",
     }
 }
 
 // ENVIRONMENT is different when running locally vs. hosted on Heroku
 if (process.env.ENVIRONMENT === 'PRODUCTION') {
     app.set('trust proxy', 1) // trust first proxy
-    sess.cookie.secure = true // serve secure cookies
+    //sess.cookie.secure = true // serve secure cookies
 }
 
 app.use(session(sess))
