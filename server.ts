@@ -43,10 +43,12 @@ app.use(cors({
 const SECRET = process.env.SECRET; // Secret password for the session
 let sess = {
     secret: SECRET,
+    saveUninitialized: true,
+    resave: true,
     proxy: true,
     cookie: {
-        secure: true,
-        sameSite: "none"
+        secure: process.env.ENVIRONMENT === "PRODUCTION",
+        sameSite: process.env.ENVIRONMENT === "PRODUCTION" ? "none" : "lax",
     }
 }
 
