@@ -41,6 +41,8 @@ export default class TuitController implements TuitControllerI {
             app.get("/api/tuits/:uid", TuitController.tuitController.findTuitById);
             app.post("/api/users/:uid/tuits", TuitController.tuitController.createTuitByUser);
             app.put("/api/tuits/:uid", TuitController.tuitController.updateTuit);
+            /*app.put("/api/tuits/:tid", TuitController.tuitController.updateLikes);
+            app.put("/api/tuits/:tid", TuitController.tuitController.updateDislikes);*/
             app.delete("/api/tuits/:uid", TuitController.tuitController.deleteTuit);
         }
         return TuitController.tuitController;
@@ -119,6 +121,26 @@ export default class TuitController implements TuitControllerI {
     updateTuit = (req: Request, res: Response) =>
         TuitController.tuitDao.updateTuit(req.params.uid, req.body)
             .then((status) => res.send(status));
+
+    /*/!**
+     * @param {Request} req Represents request from client, including path
+     * parameter tid identifying the primary key of the tuit to be modified
+     * @param {Response} res Represents response to client, including status
+     * on whether updating a tuit was successful or not
+     *!/
+    updateLikes = (req: Request, res: Response) =>
+        TuitController.tuitDao.updateLikes(req.params.tid, req.body)
+            .then((status) => res.send(status));
+
+    /!**
+     * @param {Request} req Represents request from client, including path
+     * parameter tid identifying the primary key of the tuit to be modified
+     * @param {Response} res Represents response to client, including status
+     * on whether updating a tuit was successful or not
+     *!/
+    updateDislikes = (req: Request, res: Response) =>
+        TuitController.tuitDao.updateDislikes(req.params.tid, req.body)
+            .then((status) => res.send(status));*/
 
     /**
      * @param {Request} req Represents request from client, including path
