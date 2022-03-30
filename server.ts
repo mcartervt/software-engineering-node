@@ -44,7 +44,7 @@ let sess = {
     secret: process.env.SECRET,
     saveUninitialized: true,
     resave: true,
-    //proxy: true,
+    proxy: true,
     cookie: {
         sameSite: process.env.ENVIRONMENT === "PRODUCTION" ? "none" : "lax",
         secure: process.env.ENVIRONMENT === "PRODUCTION",
@@ -54,7 +54,7 @@ let sess = {
 // ENVIRONMENT is different when running locally vs. hosted on Heroku
 if (process.env.ENVIRONMENT === 'PRODUCTION') {
     app.set('trust proxy', 1) // trust first proxy
-    //sess.cookie.secure = true // serve secure cookies
+    sess.cookie.secure = true // serve secure cookies
 }
 
 app.use(session(sess))
