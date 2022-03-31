@@ -124,7 +124,7 @@ export default class LikeController implements LikeControllerI {
             let tuit = await tuitDao.findTuitById(tid);
             if (userAlreadyDislikedTuit) {
                 await dislikeDao.userUnDislikesTuit(userId, tid);
-                tuit.stats.likes = howManyDislikedTuit - 1;
+                tuit.stats.dislikes = howManyDislikedTuit - 1;
             }
         } catch (e) {
             res.sendStatus(404);
