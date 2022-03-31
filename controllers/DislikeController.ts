@@ -101,8 +101,14 @@ export default class DislikeController implements DislikeControllerI {
         const userId = uid === "me" && profile ?
             profile._id : uid;
         try {
+            // Get dislike info
             const userAlreadyDislikedTuit = await dislikeDao.findUserDislikesTuit(userId, tid);
             const howManyDislikedTuit = await dislikeDao.countHowManyDislikedTuit(tid);
+
+            // Get like info
+            const userAlreadyLikedTuit = await likeDao.findUserLikesTuit(userId, tid);
+            const howManyLikedTuit = await likeDao.countHowManyLikedTuit(tid);
+
             let tuit = await tuitDao.findTuitById(tid);
             // If the user previously disliked the tuit
             if (userAlreadyDislikedTuit) {
@@ -112,6 +118,15 @@ export default class DislikeController implements DislikeControllerI {
             } else {
                 await DislikeController.dislikeDao.userDislikesTuit(userId, tid);
                 tuit.stats.dislikes = howManyDislikedTuit + 1;
+
+                // If previously liked
+                if (userAlreadyLikedTuit) {
+                    // Then remove the like
+                    await likeDao.userUnlikesTuit(userId, tid);
+                    tuit.stats.likes = howManyLikedTuit - 1;
+                }
+                await tuitDao.updateLikes(tid, tuit.stats);
+                res.sendStatus(200);
             };
             await tuitDao.updateDislikes(tid, tuit.stats);
             res.sendStatus(200);
@@ -119,7 +134,7 @@ export default class DislikeController implements DislikeControllerI {
             res.sendStatus(404);
         }
         // If the user had liked the tuit and now clicks dislike, then remove the like
-        try{
+        /*try{
             const userAlreadyLikedTuit = await likeDao.findUserLikesTuit(userId, tid);
             const howManyLikedTuit = await likeDao.countHowManyLikedTuit(tid);
             let tuit = await tuitDao.findTuitById(tid);
@@ -131,6 +146,6 @@ export default class DislikeController implements DislikeControllerI {
             res.sendStatus(200);
         } catch (e) {
             res.sendStatus(404);
-        }
+        }*/
     }
 };

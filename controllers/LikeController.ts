@@ -100,8 +100,14 @@ export default class LikeController implements LikeControllerI {
         const userId = uid === "me" && profile ?
             profile._id : uid;
         try {
+            // Get like related info
             const userAlreadyLikedTuit = await likeDao.findUserLikesTuit(userId, tid);
             const howManyLikedTuit = await likeDao.countHowManyLikedTuit(tid);
+
+            // Get dislike related info
+            const userAlreadyDislikedTuit = await dislikeDao.findUserDislikesTuit(userId, tid);
+            const howManyDislikedTuit = await dislikeDao.countHowManyDislikedTuit(tid);
+
             let tuit = await tuitDao.findTuitById(tid);
             // If the user previously liked the tuit
             if (userAlreadyLikedTuit) {
@@ -111,6 +117,14 @@ export default class LikeController implements LikeControllerI {
             } else {
                 await LikeController.likeDao.userLikesTuit(userId, tid);
                 tuit.stats.likes = howManyLikedTuit + 1;
+                // Check if the user previously disliked the tuit
+                if (userAlreadyDislikedTuit) {
+                    // If yes, then remove the dislike
+                    await dislikeDao.userUnDislikesTuit(userId, tid);
+                    tuit.stats.dislikes = howManyDislikedTuit - 1;
+                }
+                await tuitDao.updateDislikes(tid, tuit.stats);
+                res.sendStatus(200);
             };
             await tuitDao.updateLikes(tid, tuit.stats);
             res.sendStatus(200);
@@ -118,7 +132,7 @@ export default class LikeController implements LikeControllerI {
             res.sendStatus(404);
         }
         // If the user had disliked the tuit and now clicks like, then remove the dislike
-        try{
+        /*try{
             const userAlreadyDislikedTuit = await dislikeDao.findUserDislikesTuit(userId, tid);
             const howManyDislikedTuit = await dislikeDao.countHowManyDislikedTuit(tid);
             let tuit = await tuitDao.findTuitById(tid);
@@ -130,6 +144,6 @@ export default class LikeController implements LikeControllerI {
             res.sendStatus(200);
         } catch (e) {
             res.sendStatus(404);
-        }
+        }*/
     }
 };
