@@ -6,7 +6,6 @@ import DislikeDao from "../daos/DislikeDao";
 import LikeDao from "../daos/LikeDao";
 import DislikeControllerI from "../interfaces/DislikeControllerI";
 import TuitDao from "../daos/TuitDao";
-import LikeController from "./LikeController";
 
 /**
  * @class DislikeController Implements RESTful Web service API for dislikes resource.
@@ -125,27 +124,11 @@ export default class DislikeController implements DislikeControllerI {
                     await likeDao.userUnlikesTuit(userId, tid);
                     tuit.stats.likes = howManyLikedTuit - 1;
                 }
-                /*await tuitDao.updateLikes(tid, tuit.stats);
-                res.sendStatus(200);*/
             };
             await tuitDao.updateDislikes(tid, tuit.stats);
             res.sendStatus(200);
         } catch (e) {
             res.sendStatus(404);
         }
-        // If the user had liked the tuit and now clicks dislike, then remove the like
-        /*try{
-            const userAlreadyLikedTuit = await likeDao.findUserLikesTuit(userId, tid);
-            const howManyLikedTuit = await likeDao.countHowManyLikedTuit(tid);
-            let tuit = await tuitDao.findTuitById(tid);
-            if (userAlreadyLikedTuit) {
-                await likeDao.userUnlikesTuit(userId, tid);
-                tuit.stats.likes = howManyLikedTuit - 1;
-            }
-            await tuitDao.updateLikes(tid, tuit.stats);
-            res.sendStatus(200);
-        } catch (e) {
-            res.sendStatus(404);
-        }*/
     }
 };

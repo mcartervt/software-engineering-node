@@ -1,3 +1,8 @@
+/**
+ * @file DAO that implements asynchronous functions associated with Dislikes
+ *       using the DislikeModel.
+ */
+
 import DislikeDaoI from "../interfaces/DislikeDaoI";
 import DislikeModel from "../mongoose/dislikes/DislikeModel";
 import Dislike from "../models/dislikes/Dislike";

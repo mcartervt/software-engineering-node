@@ -123,27 +123,11 @@ export default class LikeController implements LikeControllerI {
                     await dislikeDao.userUnDislikesTuit(userId, tid);
                     tuit.stats.dislikes = howManyDislikedTuit - 1;
                 }
-                /*await tuitDao.updateDislikes(tid, tuit.stats);
-                res.sendStatus(200);*/
             };
             await tuitDao.updateLikes(tid, tuit.stats);
             res.sendStatus(200);
         } catch (e) {
             res.sendStatus(404);
         }
-        // If the user had disliked the tuit and now clicks like, then remove the dislike
-        /*try{
-            const userAlreadyDislikedTuit = await dislikeDao.findUserDislikesTuit(userId, tid);
-            const howManyDislikedTuit = await dislikeDao.countHowManyDislikedTuit(tid);
-            let tuit = await tuitDao.findTuitById(tid);
-            if (userAlreadyDislikedTuit) {
-                await dislikeDao.userUnDislikesTuit(userId, tid);
-                tuit.stats.dislikes = howManyDislikedTuit - 1;
-            };
-            await tuitDao.updateDislikes(tid, tuit.stats);
-            res.sendStatus(200);
-        } catch (e) {
-            res.sendStatus(404);
-        }*/
     }
 };

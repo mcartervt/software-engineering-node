@@ -1,3 +1,8 @@
+/**
+ * @file DAO that implements asynchronous functions associated with Likes
+ *       using the LikeModel.
+ */
+
 import LikeDaoI from "../interfaces/LikeDaoI";
 import LikeModel from "../mongoose/likes/LikeModel";
 import Like from "../models/likes/Like";
