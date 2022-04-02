@@ -19,6 +19,7 @@ import DislikeController from "./controllers/DislikeController";
 import SessionController from "./controllers/SessionController";
 import AuthenticationController from "./controllers/AuthenticationController";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 import GroupController from "./controllers/GroupController";
 const cors = require("cors");
 const session = require("express-session");
@@ -34,10 +35,11 @@ const DB_QUERY = "retryWrites=true&w=majority";
 const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;// connect to the database
 mongoose.connect(connectionString);
 
+dotenv.config();    // Configure environment variables in .env file
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: 'https://reverent-darwin-aeefbe.netlify.app'
+    origin: process.env.CORS_ORIGIN
 }));
 
 let sess = {
